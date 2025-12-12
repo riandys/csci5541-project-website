@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>It's NLPeak: Personality-Conditioned Dialogue Generation | Fall 2025 CSCI 5541</title>
+
+  <link rel="stylesheet" href="./files/bulma.min.css" />
+  <link rel="stylesheet" href="./files/styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com/">
+  <link href="./files/css2" rel="stylesheet">
+  <link href="./files/css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      font-family: 'Lato', sans-serif;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    
+    h2 {
+      font-family: 'Lato', sans-serif;
+      color: #2c3e50;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 5px;
+    }
+    
+    h3 {
+      font-family: 'Lato', sans-serif;
+      color: #34495e;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    
+    h4 {
+      font-family: 'Lato', sans-serif;
+      text-align: center;
+      color: #666;
+      font-weight: normal;
+    }
+    
+    .authors-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    
+    .author-container {
+      margin: 10px 20px;
+      text-align: center;
+    }
+    
+    .author-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 10px;
+      background: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .author-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .publication-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 2px solid #333;
+      border-radius: 25px;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s;
+      background: white;
+    }
+    
+    .button:hover {
+      background: #333;
+      color: white;
+    }
+    
+    .sys-img {
+      text-align: center;
+      margin: 20px 0;
+    }
+    
+    .sys-img img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      background: white;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    
+    table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+    
+    table caption {
+      margin-top: 10px;
+      font-style: italic;
+      color: #666;
+    }
+    
+    .example-box {
+      background: #f9f9f9;
+      border-left: 4px solid #3498db;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    
+    .highlight {
+      background: #fff3cd;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 40px 0;
+    }
+    
+    strong {
+      color: #2c3e50;
+    }
+    
+    code {
+      background: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <div class="wrapper">
+      <h1>It's NLPeak: Personality-Conditioned Dialogue Generation</h1>
+      <h4>Fall 2024 CSCI 5541 NLP: Class Project - University of Minnesota</h4>
+      <h4>Team NLPeak</h4>
+
+      <div class="authors-wrapper">
+        <div class="author-container">
+          <div class="author-image">
+            <img src="" alt="Member 1">
+          </div>
+          <p>Member 1</p>
+        </div>
+        
+        <div class="author-container">
+          <div class="author-image">
+            <img src="" alt="Member 2">
+          </div>
+          <p>Member 2</p>
+        </div>
+        
+        <div class="author-container">
+          <div class="author-image">
+            <img src="" alt="Member 3">
+          </div>
+          <p>Member 3</p>
+        </div>
+        
+        <div class="author-container">
+          <div class="author-image">
+            <img src="" alt="Member 4">
+          </div>
+          <p>Member 4</p>
+        </div>
+      </div>
+
+      <br/>
+
+      <div class="authors-wrapper">
+        <div class="publication-links">
+          <span class="link-block">
+            <a href="" target="_blank" class="button">
+              <span>Final Report</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="" target="_blank" class="button">
+              <span>Code</span>
+            </a>
+          </span>      
+          <span class="link-block">
+            <a href="" target="_blank" class="button">
+              <span>Model Weights</span>
+            </a>
+          </span>              
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <hr>
+    
+    <h2 id="abstract">Abstract</h2>
+    <p>
+      <strong>What did you try to do?</strong><br>
+      We built a system that transforms movie dialogue to match different character personality archetypes (like Hero, Mentor, Trickster) while preserving the original meaning.
+    </p>
+    <p>
+      <strong>How did you do it?</strong><br>
+      Our two-stage pipeline uses (1) a DeBERTa classifier to identify archetypes and (2) a LoRA-fine-tuned Qwen-14B generator trained on GPT-generated synthetic pairs. We improved classifier accuracy from 20% to 38% through diagnostic-driven hybrid relabeling.
+    </p>
+    <p>
+      <strong>What did you find?</strong><br>
+      Human evaluators rated outputs highly (4.69/5 personality accuracy, 4.72/5 semantic preservation), but automatic metrics showed weak correlation with human judgment (r=0.241). We discovered that adding stylistic features (like humor) is much easier than removing them—a novel asymmetric pattern in style transfer.
+    </p>
+
+    <hr>
+
+    <h2 id="teaser">Teaser Figure</h2>
+    <p>
+      Our system transforms dialogue across eight personality archetypes while preserving meaning. The two-stage pipeline combines archetype classification with retrieval-augmented generation.
+    </p>
+
+    <p class="sys-img">
+      <img src="./files/teaser.png" alt="System Pipeline">
+    </p>
+
+    <h3>The Pipeline</h3>
+    <p>
+      <strong>Stage 1:</strong> DeBERTa classifier identifies personality archetypes from input dialogue<br>
+      <strong>Stage 2:</strong> Qwen generator with LoRA adapters transforms dialogue to target archetype using FAISS retrieval for style examples
+    </p>
+
+    <hr>
+
+    <h2 id="introduction">Introduction / Background / Motivation</h2>
+
+    <p><strong>What did you try to do? What problem did you try to solve?</strong></p>
+    <p>
+      We tackled personality-conditioned dialogue generation: transforming text to match specific character archetypes (Hero, Mentor, Ally, Trickster, Shadow, Rebel, Innocent, Jester) while keeping the original message. Think of it as "what would Yoda say?" vs. "what would Han Solo say?" for the same idea.
+    </p>
+
+    <p><strong>How is it done today, and what are the limits of current practice?</strong></p>
+    <p>
+      Existing style transfer methods focus on simple attributes (formal vs. casual, positive vs. negative) but struggle with complex personality traits. Current LLMs can generate text in different styles but lack fine-grained control and often fail to preserve semantic content. No existing work addresses multi-way personality transfer with evaluation that captures both style accuracy and meaning preservation.
+    </p>
+
+    <p><strong>Who cares? If you are successful, what difference will it make?</strong></p>
+    <p>
+      This enables personality-aware dialogue systems for creative writing tools, game NPCs with consistent character voices, and personalized chatbots. More broadly, it advances controllable text generation—a key challenge in making LLMs useful for specific applications requiring precise stylistic control.
+    </p>
+
+    <hr>
+
+    <h2 id="approach">Approach</h2>
+
+    <p><strong>What did you do exactly? How did you solve the problem?</strong></p>
+    
+    <h3>Stage 1: Archetype Classifier</h3>
+    <p>
+      We fine-tuned DeBERTa-v3-base on 106,000 labeled movie dialogues. Initial labeling with GPT-4 yielded only 20% accuracy due to noisy labels. We developed a diagnostic-driven hybrid relabeling strategy:
+    </p>
+    <ul>
+      <li>Kept character-level labels for consistent archetypes (Innocent, Mentor)</li>
+      <li>Used line-level relabeling for ambiguous archetypes (Hero, Ally, Shadow, etc.)</li>
+      <li>Result: 20% → 38% accuracy with all classes achieving F1 > 0.25</li>
+    </ul>
+
+    <h3>Stage 2: Style Transfer Generator</h3>
+    <p>
+      We fine-tuned Qwen-2.5-14B-Instruct with LoRA (rank=32) on 14,000 synthetic training pairs. Each pair shows "Original archetype → Target archetype" transformations generated by GPT-4. We used FAISS retrieval to provide style examples at inference time, helping the model match target personality patterns.
+    </p>
+
+    <h3>Evaluation Framework</h3>
+    <p>
+      We developed multiple evaluation metrics:
+    </p>
+    <ul>
+      <li><strong>Personality Alignment Score (PAS):</strong> Classifier confidence on target archetype</li>
+      <li><strong>BERTScore:</strong> Semantic similarity to original</li>
+      <li><strong>Contextual Coherence:</strong> Embedding similarity between input/output contexts</li>
+      <li><strong>Human Evaluation:</strong> 3 annotators rated 100 samples on 4 dimensions</li>
+    </ul>
+
+    <p><strong>What problems did you anticipate? What problems did you encounter?</strong></p>
+    <p>
+      <strong>Challenge 1: Noisy Labels.</strong> GPT-4 character-level labeling was inconsistent. Solution: Diagnostic-driven hybrid relabeling targeted specific weak classes.
+    </p>
+    <p>
+      <strong>Challenge 2: Limited Training Data.</strong> Real movie dialogue rarely shows clear personality transformations. Solution: Synthetic pair generation with GPT-4 provided 14K training examples.
+    </p>
+    <p>
+      <strong>Challenge 3: Evaluation Gap.</strong> Automatic metrics poorly correlated with human judgment. Solution: Comprehensive human evaluation revealed this methodological challenge.
+    </p>
+
+    <hr>
+    
+    <h2 id="results">Results</h2>
+    
+    <p><strong>How did you measure success? What experiments were used?</strong></p>
+
+    <h3>Classifier Performance</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Archetype</th>
+          <th>F1 Score</th>
+          <th>Test Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Innocent</td><td>0.471</td><td>3,860</td></tr>
+        <tr><td>Mentor</td><td>0.435</td><td>4,602</td></tr>
+        <tr><td>Shadow</td><td>0.349</td><td>1,177</td></tr>
+        <tr><td>Rebel</td><td>0.336</td><td>1,202</td></tr>
+        <tr><td>Trickster</td><td>0.310</td><td>1,357</td></tr>
+        <tr><td>Hero</td><td>0.309</td><td>1,084</td></tr>
+        <tr><td>Ally</td><td>0.302</td><td>1,983</td></tr>
+        <tr><td>Jester</td><td>0.288</td><td>631</td></tr>
+        <tr><td><strong>Overall</strong></td><td><strong>37.9% accuracy</strong></td><td><strong>15,896</strong></td></tr>
+      </tbody>
+      <caption>Table 1. Classifier performance after hybrid relabeling (improved from 20%)</caption>
+    </table>
+
+    <h3>Generation Performance</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Score</th>
+          <th>Target</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Classification Accuracy</td><td>56%</td><td>Better than training (38%)</td></tr>
+        <tr><td>PAS (Mean)</td><td>0.435</td><td>&gt; 0.35</td></tr>
+        <tr><td>BERTScore F1</td><td>0.875</td><td>&gt; 0.70</td></tr>
+        <tr><td>Contextual Coherence</td><td>0.556</td><td>&gt; 0.50</td></tr>
+      </tbody>
+      <caption>Table 2. Automatic evaluation metrics on 100 test samples</caption>
+    </table>
+
+    <h3>Human Evaluation Results</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Mean Rating</th>
+          <th>5/5 Ratings</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Personality Accuracy</td><td>4.69 / 5 (σ=0.66)</td><td>79%</td></tr>
+        <tr><td>Semantic Preservation</td><td>4.72 / 5 (σ=0.59)</td><td>82%</td></tr>
+        <tr><td>Fluency</td><td>4.65 / 5 (σ=0.89)</td><td>77%</td></tr>
+        <tr><td>Overall Quality</td><td>4.56 / 5 (σ=0.86)</td><td>74%</td></tr>
+      </tbody>
+      <caption>Table 3. Human ratings from 3 annotators on 100 samples (300 total ratings)</caption>
+    </table>
+
+    <p><strong>Did you succeed? What were the key findings?</strong></p>
+    
+    <div class="example-box">
+      <strong>Finding 1: Asymmetric Transformation Difficulty</strong><br>
+      Transformations TO Jester achieve 71% classification accuracy, while transformations FROM Jester achieve only 15%. Adding humor is easier than removing it—a novel pattern suggesting fundamental differences in additive vs. subtractive style features.
+    </div>
+
+    <div class="example-box">
+      <strong>Finding 2: Evaluation Challenge</strong><br>
+      Weak correlation between automatic metrics and human ratings (PAS ↔ Personality: r=0.241). This reveals that current automatic metrics inadequately capture subjective personality perception. The 38% classifier creates a measurement ceiling.
+    </div>
+
+    <div class="example-box">
+      <strong>Finding 3: LLM-Bootstrapped Data Works</strong><br>
+      Synthetic training pairs from GPT-4 enable effective style transfer without expensive human annotation. Generated samples achieve 56% classification accuracy vs. 38% on training data, suggesting clearer personality signals.
+    </div>
+
+    <hr>
+
+    <h2 id="examples">Example Transformations</h2>
+
+    <h3>High-Quality Transformations</h3>
+    
+    <div class="example-box">
+      <strong>Shadow → Jester (PAS: 0.919)</strong><br>
+      <em>Original:</em> "He was very easy to hate. If you'll look in your mirror, when you are in a better mood..."<br>
+      <em>Generated:</em> "Oh, he's like a walking punchline! Just take a peek in that mirror when you're feeling a bit cheerier..."
+    </div>
+
+    <div class="example-box">
+      <strong>Ally → Hero (PAS: 0.847)</strong><br>
+      <em>Original:</em> "We need to stick together on this."<br>
+      <em>Generated:</em> "I'll stand with you, no matter what we face. Together, we can overcome this."
+    </div>
+
+    <div class="example-box">
+      <strong>Mentor → Innocent (PAS: 0.812)</strong><br>
+      <em>Original:</em> "Experience has taught me to be cautious in these situations."<br>
+      <em>Generated:</em> "I think everything will work out! We just have to believe and stay positive."
+    </div>
+
+    <h3>Challenging Transformations</h3>
+
+    <div class="example-box">
+      <strong>Jester → Shadow (PAS: 0.102)</strong><br>
+      <em>Original:</em> "Why so serious? Let's put a smile on that face!"<br>
+      <em>Generated:</em> "Your optimism is misplaced. This situation demands gravity, not levity."<br>
+      <em>Note:</em> Successfully removed humor, but classifier struggled to recognize darker tone.
+    </div>
+
+    <hr>
+
+    <h2 id="findings">Key Findings & Discussion</h2>
+
+    <h3>1. Granularity-Performance Trade-off</h3>
+    <p>
+      Earlier 4-archetype experiment: 48.9% accuracy, 0.493 PAS<br>
+      Current 8-archetype system: 38% accuracy, 0.435 PAS
+    </p>
+    <p>
+      Finer-grained personality distinctions reduce classification accuracy but increase practical utility. The 8-way system captures subtle differences (Hero vs. Ally vs. Innocent) that 4-way clustering misses.
+    </p>
+
+    <h3>2. Generated Text Has Clearer Personality</h3>
+    <p>
+      Generated samples achieve 56% classification accuracy vs. 38% on training data. This suggests the generator produces stronger personality signals than authentic movie dialogue—likely because GPT training pairs exaggerate archetype characteristics for clarity. While good for evaluation, this may limit naturalness in some applications.
+    </p>
+
+    <h3>3. Evaluation Challenges</h3>
+    <p>
+      <strong>Weak correlations between automatic metrics and human ratings:</strong>
+    </p>
+    <ul>
+      <li>PAS ↔ Personality Accuracy: r = +0.241</li>
+      <li>BERTScore ↔ Semantic Preservation: r = +0.052</li>
+      <li>Coherence ↔ Fluency: r = -0.237</li>
+    </ul>
+    <p>
+      <strong>Why?</strong> The 38% classifier creates a PAS measurement ceiling (~0.5 max). Humans evaluate holistically while PAS relies on specific features. BERTScore captures surface similarity but not meaningful semantic equivalence.
+    </p>
+    <p>
+      <strong>Implication:</strong> Human evaluation is essential for personality-based style transfer. Current automatic metrics are insufficient proxies for perceptual quality.
+    </p>
+
+    <hr>
+
+    <h2 id="limitations">Limitations & Future Work</h2>
+
+    <p><strong>How easily are your results able to be reproduced by others?</strong></p>
+    <p>
+      Fully reproducible with provided code, data, and model weights. Dataset (106K dialogues), classifier, generator, and evaluation code are all publicly available. Training requires ~40 Colab compute units (~$10 GPT API costs).
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Limitation</th>
+          <th>Impact</th>
+          <th>Future Direction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Classifier Accuracy (38%)</td>
+          <td>38% accuracy creates ~0.5 PAS ceiling, limits measurable quality</td>
+          <td>Better labeling, larger models, multi-task learning</td>
+        </tr>
+        <tr>
+          <td>Movie Domain Bias</td>
+          <td>Trained only on movie dialogue, may not generalize</td>
+          <td>Multi-domain data (books, social media, transcripts)</td>
+        </tr>
+        <tr>
+          <td>Asymmetric Performance</td>
+          <td>Removing stylistic features harder than adding</td>
+          <td>Specialized models for subtractive transformations</td>
+        </tr>
+        <tr>
+          <td>English Only</td>
+          <td>No cross-lingual personality transfer</td>
+          <td>Multilingual models, cross-lingual style transfer</td>
+        </tr>
+      </tbody>
+      <caption>Table 4. Key limitations and proposed solutions</caption>
+    </table>
+
+    <p><strong>What limitations does your model have? How can you extend your work?</strong></p>
+    <ul>
+      <li><strong>Improve classifier:</strong> Better labeling strategies, ensemble methods, or larger pre-trained models could push accuracy beyond 38%</li>
+      <li><strong>Subtractive transformations:</strong> Specialized architectures for removing stylistic features (humor, formality) rather than just adding them</li>
+      <li><strong>Multi-domain generalization:</strong> Extend beyond movies to books, social media, and conversational data</li>
+      <li><strong>Better evaluation metrics:</strong> Develop automatic metrics that correlate strongly with human perception of personality</li>
+      <li><strong>Interactive refinement:</strong> Allow users to iteratively refine transformations through feedback</li>
+    </ul>
+
+    <p><strong>Does your work have potential harm or risk to our society?</strong></p>
+    <p>
+      <strong>Risks:</strong> Could be misused to impersonate specific individuals or manipulate communication by mimicking trustworthy personas (e.g., mentor voice for scams). May perpetuate stereotypes if archetypes align with harmful characterizations.
+    </p>
+    <p>
+      <strong>Mitigations:</strong> Our system works with abstract archetypes, not individual identities. Results require human oversight before deployment. We recommend watermarking AI-generated personality-styled content and limiting use to creative/educational contexts with proper disclosure.
+    </p>
+
+    <hr>
+
+    <h2 id="conclusion">Conclusion</h2>
+    
+    <p>
+      We demonstrated that personality-conditioned dialogue generation across eight archetypes is achievable with a two-stage classifier-generator pipeline. Key contributions include:
+    </p>
+    <ul>
+      <li>A diagnostic-driven hybrid relabeling strategy that improved classifier accuracy from 20% to 38%</li>
+      <li>Successful use of LLM-generated synthetic pairs for style transfer training</li>
+      <li>Discovery of asymmetric transformation difficulty (adding features easier than removing)</li>
+      <li>Evidence that automatic metrics inadequately capture personality perception</li>
+    </ul>
+    <p>
+      Human evaluation (4.69/5 personality accuracy) validates that the system produces high-quality, personality-consistent transformations despite relatively modest automatic metrics. This work advances controllable generation for narrative AI systems and highlights critical evaluation challenges in subjective style transfer tasks.
+    </p>
+
+    <hr>
+
+    <h2 id="acknowledgments">Acknowledgments</h2>
+    <p>
+      We thank the course instructors for feedback on dataset size that led to our improved hybrid relabeling approach. We acknowledge the use of GPT-4 for data labeling and synthetic pair generation, and Google Colab for computational resources.
+    </p>
+
+  </div>
+</body>
+</html>
